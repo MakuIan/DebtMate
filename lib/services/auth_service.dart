@@ -24,6 +24,7 @@ class AuthService {
       email: email,
       password: password,
     );
+
     // Send Verification Email
     await userCredential.user?.sendEmailVerification();
 
@@ -46,6 +47,13 @@ class AuthService {
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  //Check if email is verified
+  Future<bool> isEmailVerified() async {
+    User? user = getCurrentUser();
+    await user?.reload();
+    return user?.emailVerified ?? false;
   }
 
   Future<void> signOut() async {

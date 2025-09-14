@@ -1,3 +1,4 @@
+import 'package:debtmate/ui/login/widgets/sign_in_google.dart';
 import 'package:flutter/material.dart';
 import 'package:debtmate/services/auth_service.dart';
 
@@ -56,14 +57,7 @@ class LoginForm extends StatelessWidget {
           ),
           SizedBox(height: 25),
           //Google Button
-          SizedBox(
-            child: IconButton(
-              onPressed: () {},
-              icon: Image.asset(
-                'assets/icons/signin-assets/iOS/png@1x/light/ios_light_sq_SU@1x.png',
-              ),
-            ),
-          ),
+          SignInWithGoogleButton(),
 
           // Register with Email button
         ],
