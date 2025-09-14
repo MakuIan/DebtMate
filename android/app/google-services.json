@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "827950512534",
+    "project_id": "debtmate-311dd",
+    "storage_bucket": "debtmate-311dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827950512534:android:9c93497488c669ce6845b7",
+        "android_client_info": {
+          "package_name": "com.example.debtmate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIVuTaX_H1n6tdlVYC3n9qGXj-OztogAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
