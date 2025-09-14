@@ -57,7 +57,7 @@ class LoginForm extends StatelessWidget {
           ),
           SizedBox(height: 25),
           //Google Button
-          SignInWithGoogleButton(),
+          GoogleSignInButton(),
 
           // Register with Email button
         ],

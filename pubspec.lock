@@ -185,7 +185,7 @@ packages:
     source: hosted
     version: "7.0.5"
   google_sign_in_ios:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: google_sign_in_ios
       sha256: c7ee744ebbcd98353966dbdee735d4fca085226f6bf725c6bea8a5c8fe0055bc

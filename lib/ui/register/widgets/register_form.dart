@@ -125,7 +125,7 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           SizedBox(height: 25),
           //Google Button
-          SignInWithGoogleButton(),
+          GoogleSignInButton(),
         ],
       ),
     );
