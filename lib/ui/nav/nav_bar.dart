@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 class NavBarScaffold extends StatelessWidget {
   final Widget child;
   final Color backgroundColor;
+
   const NavBarScaffold({
     super.key,
     required this.child,
@@ -31,30 +32,33 @@ class NavBarScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = _calculateIndex(context);
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: child,
       bottomNavigationBar: Container(
-        color: Colors.white, // keeps background clean (optional)
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
-            child: BottomNavigationBar(
-              backgroundColor: backgroundColor,
-              currentIndex: selectedIndex,
-              onTap: (index) => _onItemTapped(context, index),
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home, color: Colors.white),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart, color: Colors.white),
-                  label: '',
-                ),
-              ],
-            ),
+        color: Colors.white, // Optional background wrapper
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: backgroundColor,
+            currentIndex: selectedIndex,
+            onTap: (index) => _onItemTapped(context, index),
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white70,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home, size: 40),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bar_chart, size: 40),
+                label: '',
+              ),
+            ],
           ),
         ),
       ),
