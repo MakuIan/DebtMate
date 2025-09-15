@@ -60,6 +60,7 @@ flutter:
 
   assets:
     - assets/icons/signin-assets/iOS/png@1x/light/ios_light_sq_SU@1x.png
+    - 'assets/icons/signin-assets/iOS/png@1x/neutral/ios_neutral_rd_ctn@1x.png'
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

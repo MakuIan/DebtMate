@@ -14,7 +14,10 @@ class RegisterButton extends StatelessWidget {
       style: TextButton.styleFrom(
         foregroundColor: const Color.fromARGB(255, 0, 126, 244),
       ),
-      child: const Text("Register with Email", style: TextStyle(fontSize: 16)),
+      child: const Text(
+        "Don't have an account? Sign up",
+        style: TextStyle(fontSize: 16),
+      ),
     );
   }
 }

@@ -20,21 +20,22 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
             UserCredential userCredential = await AuthService()
                 .signInWithGoogle();
 
-            if (!mounted) return;
-            if (userCredential.user != null) {
-              context.go('/home');
-            } else {
-              context.go('/login');
+            final route = (userCredential.user != null) ? '/home' : '/login';
+            if (context.mounted) {
+              context.go(route);
             }
           } catch (e) {
             // Handle error
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error signing in with Google: $e')),
-            );
+
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Error signing in with Google: $e')),
+              );
+            }
           }
         },
         icon: Image.asset(
-          'assets/icons/signin-assets/iOS/png@1x/light/ios_light_sq_SU@1x.png',
+          'assets/icons/signin-assets/iOS/png@1x/neutral/ios_neutral_rd_ctn@1x.png',
         ),
       ),
     );

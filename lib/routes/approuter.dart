@@ -1,3 +1,4 @@
+import 'package:debtmate/ui/stats/statspage.dart';
 import 'package:go_router/go_router.dart';
 import '../ui/login/login_page.dart';
 import '../ui/register/register_page.dart';
@@ -8,6 +9,7 @@ class Approuter {
   static final GoRouter router = GoRouter(
     initialLocation: '/login',
     routes: [
+      GoRoute(path: '/', builder: (context, state) => HomePage()),
       GoRoute(path: '/login', builder: (context, state) => LoginPage()),
       GoRoute(path: '/register', builder: (context, state) => RegisterPage()),
       GoRoute(path: '/home', builder: (context, state) => HomePage()),
@@ -22,6 +24,7 @@ class Approuter {
           }
         },
       ),
+      GoRoute(path: '/stats', builder: (context, state) => Statspage()),
     ],
   );
 }
