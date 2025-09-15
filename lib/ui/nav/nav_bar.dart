@@ -3,7 +3,12 @@ import 'package:go_router/go_router.dart';
 
 class NavBarScaffold extends StatelessWidget {
   final Widget child;
-  const NavBarScaffold({super.key, required this.child});
+  final Color backgroundColor;
+  const NavBarScaffold({
+    super.key,
+    required this.child,
+    required this.backgroundColor,
+  });
 
   void _onItemTapped(BuildContext context, int index) {
     if (index == 0) {
@@ -27,14 +32,22 @@ class NavBarScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedIndex = _calculateIndex(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('DebtMate')),
+      backgroundColor: backgroundColor,
+      // appBar: AppBar(title: const Text('DebtMate')),
       body: child,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: backgroundColor,
         currentIndex: selectedIndex,
         onTap: (index) => _onItemTapped(context, index),
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Stats'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: Colors.white),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart, color: Colors.white),
+            label: '',
+          ),
         ],
       ),
     );

@@ -6,6 +6,9 @@ class Statspage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavBarScaffold(child: Center(child: Text('Stats Page')));
+    return NavBarScaffold(
+      backgroundColor: Color.fromARGB(255, 0, 126, 244),
+      child: Center(child: Text('Stats Page')),
+    );
   }
 }
