@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             HomePageHeader(),
+            //Friends Box
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

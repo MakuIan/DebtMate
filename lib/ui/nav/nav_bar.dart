@@ -33,22 +33,30 @@ class NavBarScaffold extends StatelessWidget {
     final selectedIndex = _calculateIndex(context);
     return Scaffold(
       backgroundColor: backgroundColor,
-      // appBar: AppBar(title: const Text('DebtMate')),
       body: child,
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: backgroundColor,
-        currentIndex: selectedIndex,
-        onTap: (index) => _onItemTapped(context, index),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.white),
-            label: '',
+      bottomNavigationBar: Container(
+        color: Colors.white, // keeps background clean (optional)
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: BottomNavigationBar(
+              backgroundColor: backgroundColor,
+              currentIndex: selectedIndex,
+              onTap: (index) => _onItemTapped(context, index),
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home, color: Colors.white),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.bar_chart, color: Colors.white),
+                  label: '',
+                ),
+              ],
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart, color: Colors.white),
-            label: '',
-          ),
-        ],
+        ),
       ),
     );
   }
