@@ -47,6 +47,7 @@ class _RegisterFormState extends State<RegisterForm> {
         context,
       ).showSnackBar(SnackBar(content: Text("Registration successful")));
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Error: $e")));

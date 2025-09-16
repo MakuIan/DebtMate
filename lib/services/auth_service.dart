@@ -1,14 +1,17 @@
+import 'package:debtmate/services/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  var logger = Logger();
 
   // Sign in with email and password
-  Future<UserCredential> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<UserCredential> login({
+    required String email,
+    required String password,
+  }) async {
     return await _auth.signInWithEmailAndPassword(
       email: email,
       password: password,
@@ -26,7 +29,14 @@ class AuthService {
     );
 
     // Send Verification Email
+    logger.d('Verification email sent to $email');
     await userCredential.user?.sendEmailVerification();
+
+    String uid = userCredential.user!.uid;
+    logger.d('New user created with UID:');
+    logger.d('New user created with UID: $uid');
+
+    await createUserInFirestore(uid, email);
 
     return userCredential;
   }

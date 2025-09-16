@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               LoginHeader(),
               SizedBox(height: 16),
               LoginForm(),

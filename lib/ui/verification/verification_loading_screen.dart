@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 class VerificationLoadingScreen extends StatefulWidget {
   final String email;
 
-  const VerificationLoadingScreen({required this.email});
+  const VerificationLoadingScreen({super.key, required this.email});
 
   @override
   _VerificationLoadingScreenState createState() =>

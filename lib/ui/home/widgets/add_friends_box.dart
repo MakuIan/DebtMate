@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddFriendsBox extends StatelessWidget {
-  const AddFriendsBox({Key? key}) : super(key: key);
+  const AddFriendsBox({super.key});
 
   @override
   Widget build(BuildContext context) {

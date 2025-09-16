@@ -1,6 +1,5 @@
 import 'package:debtmate/ui/register/widgets/register_header.dart';
 import 'package:flutter/material.dart';
-import 'package:debtmate/ui/login/widgets/login_header.dart';
 import 'package:debtmate/ui/register/widgets/return_to_login.dart';
 import 'package:debtmate/ui/register/widgets/register_form.dart';
 
