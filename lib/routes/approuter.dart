@@ -1,3 +1,4 @@
+import 'package:debtmate/ui/reset_password/reset_passwordPage.dart';
 import 'package:debtmate/ui/stats/statspage.dart';
 import 'package:go_router/go_router.dart';
 import '../ui/login/login_page.dart';
@@ -25,6 +26,10 @@ class Approuter {
         },
       ),
       GoRoute(path: '/stats', builder: (context, state) => Statspage()),
+      GoRoute(
+        path: '/resetPassword',
+        builder: (context, state) => ResetPasswordPage(),
+      ),
     ],
   );
 }

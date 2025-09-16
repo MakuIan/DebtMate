@@ -6,7 +6,10 @@ import 'package:logger/logger.dart';
 final _firestore = FirebaseFirestore.instance;
 var logger = Logger();
 
-Future<void> createUserInFirestore(String uid, String email) async {
+Future<void> createUserWithFriendCodeInFirestore(
+  String uid,
+  String email,
+) async {
   ('Creating user in Firestore with UID: $uid');
   String friendCode = await generateUniqueFriendCode(uid);
   await _firestore.collection('users').doc(uid).set({

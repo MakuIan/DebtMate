@@ -59,7 +59,7 @@ class _LoginButtonState extends State<LoginButton> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("Error: $e")));
+      ).showSnackBar(SnackBar(content: Text("Email or Password are wrong")));
     }
   }
 

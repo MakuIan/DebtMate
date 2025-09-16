@@ -36,7 +36,7 @@ class AuthService {
     logger.d('New user created with UID:');
     logger.d('New user created with UID: $uid');
 
-    await createUserInFirestore(uid, email);
+    await createUserWithFriendCodeInFirestore(uid, email);
 
     return userCredential;
   }
@@ -55,6 +55,20 @@ class AuthService {
       idToken: googleAuth.idToken,
     );
 
+    // Sign in to Firebase with the Google credential
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithCredential(credential);
+
+    // Access the signed-in user's information
+    User? user = userCredential.user;
+
+    if (user != null) {
+      String uid = user.uid; // Firebase Auth UID
+      String? email = user.email;
+
+      if (email != null) await createUserWithFriendCodeInFirestore(uid, email);
+    } // Google account email
+
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
@@ -68,6 +82,15 @@ class AuthService {
 
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      logger.d("Password reset email sent!");
+    } on FirebaseAuthException catch (e) {
+      logger.d("Error: ${e.message}");
+    }
   }
 
   User? getCurrentUser() {
