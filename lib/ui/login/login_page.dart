@@ -21,7 +21,10 @@ class LoginPage extends StatelessWidget {
               RegisterButton(),
               TextButton(
                 onPressed: () => {context.go('/resetPassword')},
-                child: const Text('Forgot Password?'),
+                child: const Text(
+                  'Forgot Password?',
+                  style: TextStyle(color: Color.fromARGB(255, 0, 126, 244)),
+                ),
               ),
             ],
           ),

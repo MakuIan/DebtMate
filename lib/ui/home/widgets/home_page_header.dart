@@ -1,4 +1,7 @@
+import 'package:debtmate/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({super.key});
@@ -51,15 +54,25 @@ class HomePageHeader extends StatelessWidget {
               ),
             ],
           ),
-          IconButton(
+          PopupMenuButton<String>(
+            offset: const Offset(0, 60),
             icon: const Icon(
               Icons.account_circle,
               size: 55,
               color: Colors.white,
             ),
-            onPressed: () {
-              // TODO Handle settings icon press
+            onSelected: (value) {
+              if (value == 'logout') {
+                AuthService().signOut();
+                context.go('/login');
+              }
             },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'logout',
+                child: Text('Logout'),
+              ),
+            ],
           ),
         ],
       ),

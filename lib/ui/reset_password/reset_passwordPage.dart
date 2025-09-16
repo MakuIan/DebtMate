@@ -1,10 +1,11 @@
 import 'package:debtmate/services/auth_service.dart';
+import 'package:debtmate/ui/reset_password/widget/reset_password_header.dart';
+import 'package:debtmate/ui/widgets/blue_button_style.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 
 class ResetPasswordPage extends StatefulWidget {
-  const ResetPasswordPage({Key? key}) : super(key: key);
+  const ResetPasswordPage({super.key});
 
   @override
   _ResetPasswordPageState createState() => _ResetPasswordPageState();
@@ -12,50 +13,61 @@ class ResetPasswordPage extends StatefulWidget {
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final TextEditingController emailController = TextEditingController();
-  final logger = Logger();
 
   void _resetPassword() async {
     final email = emailController.text.trim();
-
     await AuthService().resetPassword(email);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Reset Password')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
+      body: Center(
+        child: SizedBox(
+          width: 300,
+          child: Column(
+            children: [
+              const SizedBox(height: 60),
+              const ResetPasswordHeader(),
+              const SizedBox(height: 60),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            TextButton(
-              onPressed: () {
-                _resetPassword();
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Password reset email sent!'),
-                      duration: Duration(seconds: 3),
-                    ),
-                  );
-                }
-                context.go('/login');
-              },
-              child: Text('Reset Password'),
-            ),
-            TextButton(
-              onPressed: () => {context.go('/login')},
-              child: Text('Return'),
-            ),
-          ],
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  style: AppBlueButtonStyles.elevated,
+                  onPressed: () {
+                    _resetPassword();
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Password reset email sent!'),
+                          duration: Duration(seconds: 3),
+                        ),
+                      );
+                    }
+                    context.go('/login');
+                  },
+                  child: const Text('Reset Password'),
+                ),
+              ),
+              const SizedBox(height: 45),
+              SizedBox(
+                width: 100,
+                child: TextButton(
+                  style: AppBlueButtonStyles.elevated,
+                  onPressed: () => context.go('/login'),
+                  child: const Text('Return'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

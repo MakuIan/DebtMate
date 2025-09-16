@@ -1,3 +1,4 @@
+import 'package:debtmate/ui/widgets/blue_button_style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -11,8 +12,8 @@ class LoginButton extends StatefulWidget {
   const LoginButton({
     required this.emailController,
     required this.passwordController,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _LoginButtonState createState() => _LoginButtonState();
@@ -21,16 +22,16 @@ class LoginButton extends StatefulWidget {
 class _LoginButtonState extends State<LoginButton> {
   var logger = Logger();
   void _handleLogin() async {
-    final _email = widget.emailController.text.trim();
-    final _password = widget.passwordController.text.trim();
+    final email = widget.emailController.text.trim();
+    final password = widget.passwordController.text.trim();
 
-    logger.d('Attempting login with email: $_email');
+    logger.d('Attempting login with email: $email');
 
     try {
       // call your AuthService
       final userCredential = await AuthService().login(
-        email: _email,
-        password: _password,
+        email: email,
+        password: password,
       );
       final user = userCredential.user;
       if (user != null) {
@@ -69,13 +70,7 @@ class _LoginButtonState extends State<LoginButton> {
       onPressed: () {
         _handleLogin();
       },
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 15),
-        backgroundColor: Color.fromARGB(255, 0, 126, 244),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        foregroundColor: Colors.white,
-      ),
+      style: AppBlueButtonStyles.elevated,
       child: Text('Login'),
     );
   }

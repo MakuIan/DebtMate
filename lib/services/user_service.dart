@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math';
 import 'package:logger/logger.dart';
 
@@ -10,6 +9,17 @@ Future<void> createUserWithFriendCodeInFirestore(
   String uid,
   String email,
 ) async {
+  logger.d('Checking if user already exists in Firestore with UID: $uid');
+
+  DocumentSnapshot userDoc = await _firestore
+      .collection('users')
+      .doc(uid)
+      .get();
+
+  if (userDoc.exists) {
+    logger.d('User already exists in Firestore for UID: $uid');
+    return; // stop here, no need to recreate
+  }
   ('Creating user in Firestore with UID: $uid');
   String friendCode = await generateUniqueFriendCode(uid);
   await _firestore.collection('users').doc(uid).set({
