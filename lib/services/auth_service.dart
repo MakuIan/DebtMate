@@ -36,7 +36,7 @@ class AuthService {
     logger.d('New user created with UID:');
     logger.d('New user created with UID: $uid');
 
-    await createUserWithFriendCodeInFirestore(uid, email);
+    await UserService().createUserWithFriendCodeInFirestore(uid, email);
 
     return userCredential;
   }
@@ -66,7 +66,8 @@ class AuthService {
       String uid = user.uid; // Firebase Auth UID
       String? email = user.email;
 
-      if (email != null) await createUserWithFriendCodeInFirestore(uid, email);
+      if (email != null)
+        await UserService().createUserWithFriendCodeInFirestore(uid, email);
     } // Google account email
 
     // Once signed in, return the UserCredential

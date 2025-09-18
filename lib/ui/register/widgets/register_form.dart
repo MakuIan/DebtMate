@@ -66,6 +66,12 @@ class _RegisterFormState extends State<RegisterForm> {
             decoration: InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 0, 126, 244),
+                  width: 2.0,
+                ),
+              ),
             ),
           ),
           SizedBox(height: 10),
@@ -74,6 +80,12 @@ class _RegisterFormState extends State<RegisterForm> {
             decoration: InputDecoration(
               labelText: 'Password',
               border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 0, 126, 244),
+                  width: 2.0,
+                ),
+              ),
             ),
             obscureText: true,
           ),
@@ -84,6 +96,12 @@ class _RegisterFormState extends State<RegisterForm> {
             decoration: InputDecoration(
               labelText: 'Confirm Password',
               border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 0, 126, 244),
+                  width: 2.0,
+                ),
+              ),
             ),
             obscureText: true,
           ),

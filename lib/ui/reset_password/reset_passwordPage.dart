@@ -35,6 +35,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 0, 126, 244),
+                      width: 2.0,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),

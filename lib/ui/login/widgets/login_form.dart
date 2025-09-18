@@ -24,6 +24,12 @@ class _LoginFormState extends State<LoginForm> {
             decoration: InputDecoration(
               labelText: 'Email',
               border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 0, 126, 244),
+                  width: 2.0,
+                ),
+              ),
             ),
           ),
           SizedBox(height: 15),
@@ -32,6 +38,12 @@ class _LoginFormState extends State<LoginForm> {
             decoration: InputDecoration(
               labelText: 'Password',
               border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 0, 126, 244),
+                  width: 2.0,
+                ),
+              ),
             ),
             obscureText: true,
           ),

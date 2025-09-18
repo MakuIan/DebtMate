@@ -1,10 +1,15 @@
 import 'package:debtmate/services/auth_service.dart';
+import 'package:debtmate/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePageHeader extends StatelessWidget {
-  const HomePageHeader({super.key});
+  final DocumentSnapshot userDoc;
+  final String displayName;
+  HomePageHeader({super.key, required this.userDoc})
+    : displayName = userDoc.get('displayName');
 
   @override
   Widget build(BuildContext context) {
@@ -31,28 +36,37 @@ class HomePageHeader extends StatelessWidget {
               // TODO Handle notification icon press
             },
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 70,
-                child: Icon(
-                  Icons.price_check,
-                  color: Color.fromARGB(255, 0, 126, 244),
-                  size: 120,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 70,
+                  child: Icon(
+                    Icons.price_check,
+                    color: Color.fromARGB(255, 0, 126, 244),
+                    size: 120,
+                  ),
                 ),
-              ),
-              SizedBox(height: 4),
-              Text(
-                'Hello!',
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                SizedBox(height: 4),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  alignment: Alignment.center,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'Hello $displayName!',
+                      style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           PopupMenuButton<String>(
             offset: const Offset(0, 60),

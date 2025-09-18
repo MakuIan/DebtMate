@@ -1,3 +1,4 @@
+import 'package:debtmate/ui/home/widgets/add_friends_dialog.dart';
 import 'package:flutter/material.dart';
 
 class AddFriendsBox extends StatelessWidget {
@@ -24,12 +25,7 @@ class AddFriendsBox extends StatelessWidget {
                 width: 2,
               ),
             ),
-            child: IconButton(
-              icon: const Icon(Icons.add, size: 40, color: Colors.white),
-              onPressed: () {
-                // TODO: Handle add friend action
-              },
-            ),
+            child: AddFriendsDialog(),
           ),
 
           const SizedBox(width: 8),
