@@ -1,8 +1,6 @@
 import 'package:debtmate/services/auth_service.dart';
-import 'package:debtmate/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePageHeader extends StatelessWidget {

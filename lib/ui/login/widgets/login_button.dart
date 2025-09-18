@@ -1,5 +1,4 @@
 import 'package:debtmate/ui/widgets/blue_button_style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:debtmate/services/auth_service.dart';

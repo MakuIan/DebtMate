@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../services/friendship_service.dart';
 
 class AddFriendsDialog extends StatefulWidget {
-  const AddFriendsDialog({Key? key}) : super(key: key);
+  const AddFriendsDialog({super.key});
 
   @override
   _AddFriendsDialogState createState() => _AddFriendsDialogState();

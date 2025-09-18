@@ -66,8 +66,9 @@ class AuthService {
       String uid = user.uid; // Firebase Auth UID
       String? email = user.email;
 
-      if (email != null)
+      if (email != null) {
         await UserService().createUserWithFriendCodeInFirestore(uid, email);
+      }
     } // Google account email
 
     // Once signed in, return the UserCredential
