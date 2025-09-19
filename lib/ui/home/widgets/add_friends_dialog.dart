@@ -14,6 +14,7 @@ class _AddFriendsDialogState extends State<AddFriendsDialog> {
   final TextEditingController _friendCodeTextFieldController =
       TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool isManual = false;
 
   void _showAddFriendsDialog() {
     showDialog(
@@ -29,30 +30,29 @@ class _AddFriendsDialogState extends State<AddFriendsDialog> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Close button at top right
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ),
-                const Text(
-                  'Add Friends',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                ),
-                // Column centered content
-                Column(
+            child: StatefulBuilder(
+              builder: (context, setState) {
+                return Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 10), // space below close button
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    ),
                     const Text(
-                      'Enter a Friend codes to add your friend',
+                      'Add Friends',
                       style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      isManual ? 'Enter a name' : 'Enter a friend code',
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
@@ -61,17 +61,17 @@ class _AddFriendsDialogState extends State<AddFriendsDialog> {
                     TextField(
                       controller: _friendCodeTextFieldController,
                       decoration: InputDecoration(
-                        hintText: 'Friend Code',
+                        hintText: isManual ? 'Name' : 'Friend Code',
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: const Color.fromARGB(255, 203, 202, 202),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 203, 202, 202),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color.fromARGB(255, 0, 126, 244),
                             width: 2.0,
                           ),
@@ -83,10 +83,14 @@ class _AddFriendsDialogState extends State<AddFriendsDialog> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          FriendshipService().addFriendViaFriendCode(
-                            _friendCodeTextFieldController.text.trim(),
-                            _auth.currentUser!.uid,
-                          );
+                          if (!isManual) {
+                            FriendshipService().addFriendViaFriendCode(
+                              _friendCodeTextFieldController.text.trim(),
+                              _auth.currentUser!.uid,
+                            );
+                          } else {
+                            // TODO Add a Friend manually to the database
+                          }
                           Navigator.of(context).pop();
                         },
                         style: AppBlueButtonStyles.elevated,
@@ -94,15 +98,23 @@ class _AddFriendsDialogState extends State<AddFriendsDialog> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          isManual = !isManual;
+                        });
+                        logger.d('isManual: $isManual');
+                      },
                       child: Text(
-                        'or Add manually',
-                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        isManual ? 'or Add via Friend Code' : 'or Add manually',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ],
-                ),
-              ],
+                );
+              },
             ),
           ),
         );
