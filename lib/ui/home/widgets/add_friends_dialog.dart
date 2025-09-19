@@ -89,7 +89,10 @@ class _AddFriendsDialogState extends State<AddFriendsDialog> {
                               _auth.currentUser!.uid,
                             );
                           } else {
-                            // TODO Add a Friend manually to the database
+                            FriendshipService().addManualyCreatedFriend(
+                              _auth.currentUser!.uid,
+                              _friendCodeTextFieldController.text.trim(),
+                            );
                           }
                           Navigator.of(context).pop();
                         },

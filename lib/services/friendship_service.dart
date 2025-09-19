@@ -55,4 +55,23 @@ class FriendshipService {
       return AddFriendResult.failure('Error getting FriendCode Document: $e');
     }
   }
+
+  Future<AddFriendResult> addManualyCreatedFriend(
+    String uid,
+    String friendName,
+  ) async {
+    logger.d(
+      'Adding $friendName to the users/$uid/manualFriends Subcollection',
+    );
+    try {
+      await _firestore.collection('users/$uid/manualFriends/').add({
+        'displayName': friendName,
+        'addedAt': FieldValue.serverTimestamp(),
+      });
+      return AddFriendResult.success('Successfully created Friend');
+    } catch (e) {
+      logger.d('Error creating Manual Friend: $e');
+      return AddFriendResult.failure('Error creating Manual Friend $e');
+    }
+  }
 }
