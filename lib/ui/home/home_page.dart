@@ -17,35 +17,20 @@ class HomePage extends StatelessWidget {
     return NavBarScaffold(
       backgroundColor: const Color.fromARGB(255, 0, 126, 244),
       child: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 0, 126, 244),
-                Color.fromARGB(255, 0, 126, 244),
-                Colors.white,
-                Colors.white,
+        child: FutureBuilder<DocumentSnapshot>(
+          future: UserService().getUserDoc(_auth.currentUser!.uid),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return CircularProgressIndicator();
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 16),
+                HomePageHeader(userDoc: snapshot.data!),
+                const AddFriendsBox(),
+                FriendList(),
               ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: [0.0, 0.8, 0.8, 1.0],
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 16),
-              FutureBuilder<DocumentSnapshot>(
-                future: UserService().getUserDoc(_auth.currentUser!.uid),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return CircularProgressIndicator();
-                  return HomePageHeader(userDoc: snapshot.data!);
-                },
-              ),
-              const AddFriendsBox(),
-              FriendList(),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

@@ -1,16 +1,9 @@
 import 'package:logger/logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/add_friend_result.dart';
 
 final _firestore = FirebaseFirestore.instance;
 var logger = Logger();
-
-class AddFriendResult {
-  final bool success;
-  final String? message;
-
-  AddFriendResult.success([this.message]) : success = true;
-  AddFriendResult.failure(this.message) : success = false;
-}
 
 class FriendshipService {
   Future<AddFriendResult> addFriendViaFriendCode(

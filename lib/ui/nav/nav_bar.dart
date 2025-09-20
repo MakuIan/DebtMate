@@ -39,7 +39,6 @@ class NavBarScaffold extends StatelessWidget {
       bottomNavigationBar: Container(
         color: Colors.white, // Optional background wrapper
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: backgroundColor,

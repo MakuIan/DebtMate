@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 import 'friend_code_service.dart';
+import '../models/friend.dart';
+import 'package:rxdart/rxdart.dart';
 
 final _firestore = FirebaseFirestore.instance;
 var logger = Logger();
@@ -39,5 +41,48 @@ class UserService {
 
   Future<DocumentSnapshot> getUserDoc(String uid) async {
     return _firestore.collection('users').doc(uid).get();
+  }
+
+  Stream<List<Friend>> getFriendsStream(String uid) {
+    final userDoc = _firestore.collection('users').doc(uid);
+
+    // Stream of normal friends UIDs
+    final Stream<QuerySnapshot<Map<String, dynamic>>> friendsStream = userDoc
+        .collection('friends')
+        .snapshots();
+
+    // Stream of manual friends
+    final Stream<QuerySnapshot<Map<String, dynamic>>> manualFriendsStream =
+        userDoc.collection('manualFriends').snapshots();
+
+    // Combine both streams
+    return Rx.combineLatest2(friendsStream, manualFriendsStream, (
+      QuerySnapshot<Map<String, dynamic>> qsFriends,
+      QuerySnapshot<Map<String, dynamic>> qsManualFriends,
+    ) async {
+      List<Friend> friendsList = [];
+
+      // Normal friends: fetch each user's document
+      final normalFriendsFutures = qsFriends.docs.map((doc) async {
+        final friendDoc = await _firestore
+            .collection('users')
+            .doc(doc.id)
+            .get();
+        return Friend.fromUserDoc(friendDoc);
+      }).toList();
+
+      final normalFriends = await Future.wait(normalFriendsFutures);
+      friendsList.addAll(normalFriends);
+
+      // Manual friends
+      final manualFriends = qsManualFriends.docs
+          .map((doc) => Friend.fromManualFriendDoc(doc))
+          .toList();
+      friendsList.addAll(manualFriends);
+
+      return friendsList;
+    }).asyncMap(
+      (futureList) => futureList,
+    ); // convert Future<List> -> Stream<List>
   }
 }
